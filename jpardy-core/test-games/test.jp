@@ -1,0 +1,31 @@
+<game>
+  <players>
+    <player>
+      <nickname>one</nickname>
+      <points>0</points>
+    </player>
+    <player>
+      <nickname>two</nickname>
+      <points>0</points>
+    </player>
+    <player>
+      <nickname>three</nickname>
+      <points>0</points>
+    </player>
+  </players>
+  <categories>
+    <category>
+      <displayName>Java-Neuerungen</displayName>
+      <field>
+        <points>100</points>
+        <answer>Lambdas</answer>
+        <question>Was ist das große Thema von Java 8?</question>
+      </field>
+      <field>
+        <points>200</points>
+        <answer>Generics</answer>
+        <question>Wie worden Collections in Java 5 erweitert?</question>
+      </field>
+    </category>
+  </categories>
+</game>
