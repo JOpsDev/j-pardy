@@ -30,6 +30,16 @@ public class Player {
 	public boolean isReady() {
 		return nickname != null;
 	}
+
+
+	public void addPoints(Field field) {
+		points += field.getPoints();
+	}
+
+
+	public void subtractPoints(Field field) {
+		points -= field.getPoints();
+	}
 	
 
 }

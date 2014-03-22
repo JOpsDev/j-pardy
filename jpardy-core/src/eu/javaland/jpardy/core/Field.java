@@ -38,7 +38,7 @@ public class Field implements Comparable<Field>{
 	}
 
 
-	public void reveal() throws InvalidInputException {
+	public void reveal() {
 		if (status != FieldStatus.HIDDEN) throw new InvalidInputException("field '"+answer+"' has already been revealed");
 		status = FieldStatus.REVEALED;
 	}
@@ -48,6 +48,12 @@ public class Field implements Comparable<Field>{
 		if (points == 0) throw new InvalidGameStateException("field '"+answer+"' has no points assigned (=0)");
 		if (answer == null || answer.isEmpty()) throw new InvalidGameStateException("field has null or empty string set as an answer");
 		if (status == null) throw new InvalidGameStateException("field '"+answer+"' has null as its status");
+	}
+
+
+	public void solved() {
+		if (status != FieldStatus.REVEALED) throw new InvalidInputException("field '"+answer+"' is in wrong state: "+status);
+		status = FieldStatus.OPEN;
 	}
 	
 }

@@ -66,12 +66,23 @@ public class Game {
 		return xStream;
 	}
 
-	public Field showField(int categoryIndex, int fieldPoints) throws InvalidInputException {
+	public Field showField(int categoryIndex, int fieldPoints) {
 		if (categoryIndex< 1 || categoryIndex > categories.size()) throw new InvalidInputException("the category number has to be beetween 1 and "+categories.size()+" but was "+categoryIndex);
 		Category category = categories.get(categoryIndex-1);
 		Field field = category.getField(fieldPoints);
 		field.reveal();
 		return field;
+		
+	}
+
+	public void solveField(Field field, Player player) {
+		field.solved();
+		player.addPoints(field);
+		
+	}
+
+	public void missedField(Field field, Player player) {
+		player.subtractPoints(field);
 		
 	}
 

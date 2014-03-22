@@ -44,14 +44,10 @@ public class GameTest {
 		Category category = new Category("Java-Neuerungen");
 		game.addCategroy(category);
 		
-		Field field = new Field(100,"Lambdas","Was ist das große Thema von Java 8?");
+		Field field = new Field(100,"answer 1","question 1?");
 		category.addField(field);
 
-		field = new Field(200,"Generics","Wie worden Collections in Java 5 erweitert?");
+		field = new Field(200,"answer 2","question 2?");
 		category.addField(field);
-
-		XStream xstream = Game.getXstream();
-		String xml = xstream.toXML(game);
-		System.out.println(xml);
 	}
 }

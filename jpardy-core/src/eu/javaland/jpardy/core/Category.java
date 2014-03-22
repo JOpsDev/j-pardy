@@ -22,7 +22,7 @@ public class Category {
 		fields.add(field);
 	}
 
-	public Field getField(int fieldPoints) throws InvalidInputException {
+	public Field getField(int fieldPoints) {
 		for (Field field : fields) {
 			if (field.getPoints() == fieldPoints) {
 				return field;
