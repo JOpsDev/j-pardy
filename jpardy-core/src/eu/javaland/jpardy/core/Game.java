@@ -15,6 +15,8 @@ public class Game {
 	private List<Player> players = new ArrayList<>();
 	private List<Category> categories = new ArrayList<>();
 
+	private Integer numberOfRows = null;
+	
 
 	public List<Player> getPlayers() {
 		return players;
@@ -26,6 +28,10 @@ public class Game {
 	
 	public void addCategroy(Category category) {
 		categories.add(category);
+	}
+
+	public List<Category> getCategories() {
+		return categories;
 	}
 
 	public boolean isReady() {
@@ -53,6 +59,7 @@ public class Game {
 		for (Category category : categories) {
 			category.check();
 		}
+		getRowCount();
 	}
 
 	public static XStream getXstream() {
@@ -61,7 +68,6 @@ public class Game {
 		xStream.alias("player",Player.class);
 		xStream.alias("category",Category.class);
 		xStream.alias("field",Field.class);
-//		xStream.alias("game",Game.class);
 		xStream.addImplicitCollection(Category.class, "fields");
 		return xStream;
 	}
@@ -76,13 +82,38 @@ public class Game {
 	}
 
 	public void solveField(Field field, Player player) {
-		field.solved();
+		field.markSolved();
 		player.addPoints(field);
 		
 	}
 
 	public void missedField(Field field, Player player) {
 		player.subtractPoints(field);
+		
+	}
+
+	public boolean isRunning() {
+		for (Category category : categories) {
+			if (!category.allFieldsOpen()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public int getCategoryCount() {
+		return categories.size();
+	}
+	
+	public int getRowCount() throws InvalidGameStateException {
+		if (numberOfRows != null) return numberOfRows;
+		if (categories.isEmpty()) throw new IllegalStateException("there are no categories added from which I could count the number of rows/fields");
+		int rowcount = categories.get(0).getFieldCount();
+		for (Category category : categories) {
+			if (category.getFieldCount() != rowcount) throw new InvalidGameStateException("all categories must have the the same number of rows/fields");
+		}
+		numberOfRows = rowcount;
+		return rowcount;
 		
 	}
 

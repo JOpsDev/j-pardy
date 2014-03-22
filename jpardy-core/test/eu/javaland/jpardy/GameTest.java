@@ -1,8 +1,8 @@
 package eu.javaland.jpardy;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
+import java.util.List;
 
 import org.junit.Test;
 
@@ -49,5 +49,34 @@ public class GameTest {
 
 		field = new Field(200,"answer 2","question 2?");
 		category.addField(field);
+	}
+	
+	@Test
+	public void testRunning() throws Exception {
+		Game game = Game.fromFile("test-games/small.jp");
+		Player pl = game.getPlayers().get(0);
+		
+		assertTrue(game.isRunning());
+
+		Field field;
+		field = game.showField(1, 100);
+		game.solveField(field, pl);
+		assertTrue(game.isRunning());
+		field = game.showField(1, 200);
+		game.solveField(field, pl);
+		assertTrue(game.isRunning());
+		field = game.showField(2, 100);
+		game.solveField(field, pl);
+		assertTrue(game.isRunning());
+		field = game.showField(2, 200);
+		game.solveField(field, pl);
+		assertFalse(game.isRunning());
+		
+	}
+	
+	@Test
+	public void testGameCount() throws Exception {
+		Game game = Game.fromFile("test-games/small.jp");
+		assertEquals(2, game.getCategoryCount());
 	}
 }

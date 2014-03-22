@@ -2,8 +2,12 @@ package eu.javaland.jpardy;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+import java.util.Set;
+
 import org.junit.Test;
 
+import eu.javaland.jpardy.core.Category;
 import eu.javaland.jpardy.core.Field;
 import eu.javaland.jpardy.core.FieldStatus;
 import eu.javaland.jpardy.core.Game;
@@ -47,6 +51,23 @@ public class HomerunTest {
 		assertEquals(-100, p2.getPoints());
 		game.solveField(field, p3);
 		assertEquals(400, p3.getPoints());
+		
+		// solve all the rest
+		int p1Pts = p1.getPoints();
+		while (game.isRunning()) {
+			List<Category> categories = game.getCategories();
+			for (Category category : categories) {
+				Set<Field> fields = category.getFields();
+				for (Field actField : fields) {
+					if (actField.isHidden()) {
+						actField.reveal();
+						game.solveField(actField, p1);
+						p1Pts += actField.getPoints();
+					}
+				}
+			}
+		}
+		assertEquals(p1Pts, p1.getPoints());
 		
 		
 	}

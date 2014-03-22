@@ -36,6 +36,10 @@ public class Field implements Comparable<Field>{
 	public FieldStatus getStatus() {
 		return status ;
 	}
+	
+	public boolean isHidden() {
+		return FieldStatus.HIDDEN.equals(status);
+	}
 
 
 	public void reveal() {
@@ -51,7 +55,7 @@ public class Field implements Comparable<Field>{
 	}
 
 
-	public void solved() {
+	public void markSolved() {
 		if (status != FieldStatus.REVEALED) throw new InvalidInputException("field '"+answer+"' is in wrong state: "+status);
 		status = FieldStatus.OPEN;
 	}

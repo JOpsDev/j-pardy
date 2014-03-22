@@ -10,6 +10,10 @@ public class Category {
 	private String displayName;
 	private Set<Field> fields = new TreeSet<>();
 
+	public Set<Field> getFields() {
+		return fields;
+	}
+
 	public Category(String displayName) {
 		this.displayName= displayName;
 	}
@@ -39,6 +43,19 @@ public class Category {
 		for (Field field : fields) {
 			field.check();
 		}
+	}
+
+	public boolean allFieldsOpen() {
+		for (Field field: fields) {
+			if (!FieldStatus.OPEN.equals(field.getStatus())) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public int getFieldCount() {
+		return fields.size();
 	}
 
 }

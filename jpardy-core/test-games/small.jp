@@ -1,0 +1,40 @@
+<game>
+  <players>
+    <player>
+      <nickname>one</nickname>
+      <points>0</points>
+    </player>
+  </players>
+  <categories>
+    <category>
+      <displayName>Cat D</displayName>
+      <field>
+        <points>100</points>
+        <answer>A-D1</answer>
+        <question>Q-D1</question>
+        <status>HIDDEN</status>
+      </field>
+      <field>
+        <points>200</points>
+        <answer>A-D2</answer>
+        <question>Q-D2</question>
+        <status>HIDDEN</status>
+      </field>
+    </category>
+    <category>
+      <displayName>Cat E</displayName>
+      <field>
+        <points>100</points>
+        <answer>A-E1</answer>
+        <question>Q-E1</question>
+        <status>HIDDEN</status>
+      </field>
+      <field>
+        <points>200</points>
+        <answer>A-E2</answer>
+        <question>Q-E2</question>
+        <status>HIDDEN</status>
+      </field>
+    </category>
+  </categories>
+</game>
