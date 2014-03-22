@@ -59,25 +59,21 @@
         <points>200</points>
         <answer>A-B2</answer>
         <question>Q-B2</question>
-        <status>HIDDEN</status>
       </field>
       <field>
         <points>300</points>
         <answer>A-B3</answer>
         <question>Q-B3</question>
-        <status>HIDDEN</status>
       </field>
       <field>
         <points>400</points>
         <answer>A-B4</answer>
         <question>Q-B4</question>
-        <status>HIDDEN</status>
       </field>
       <field>
         <points>500</points>
         <answer>A-B5</answer>
         <question>Q-B5</question>
-        <status>HIDDEN</status>
       </field>      
     </category>
     <category>
@@ -86,31 +82,26 @@
         <points>100</points>
         <answer>A-C1</answer>
         <question>Q-C1</question>
-        <status>HIDDEN</status>
       </field>
       <field>
         <points>200</points>
         <answer>A-C2</answer>
         <question>Q-C2</question>
-        <status>HIDDEN</status>
       </field>
       <field>
         <points>300</points>
         <answer>A-C3</answer>
         <question>Q-C3</question>
-        <status>HIDDEN</status>
       </field>
       <field>
         <points>400</points>
         <answer>A-C4</answer>
         <question>Q-C4</question>
-        <status>HIDDEN</status>
       </field>
       <field>
         <points>500</points>
         <answer>A-C5</answer>
         <question>Q-C5</question>
-        <status>HIDDEN</status>
       </field>      
     </category>
     <category>
@@ -119,31 +110,26 @@
         <points>100</points>
         <answer>A-D1</answer>
         <question>Q-D1</question>
-        <status>HIDDEN</status>
       </field>
       <field>
         <points>200</points>
         <answer>A-D2</answer>
         <question>Q-D2</question>
-        <status>HIDDEN</status>
       </field>
       <field>
         <points>300</points>
         <answer>A-D3</answer>
         <question>Q-D3</question>
-        <status>HIDDEN</status>
       </field>
       <field>
         <points>400</points>
         <answer>A-D4</answer>
         <question>Q-D4</question>
-        <status>HIDDEN</status>
       </field>
       <field>
         <points>500</points>
         <answer>A-D5</answer>
         <question>Q-D5</question>
-        <status>HIDDEN</status>
       </field>      
     </category>
     <category>
@@ -152,31 +138,26 @@
         <points>100</points>
         <answer>A-E1</answer>
         <question>Q-E1</question>
-        <status>HIDDEN</status>
       </field>
       <field>
         <points>200</points>
         <answer>A-E2</answer>
         <question>Q-E2</question>
-        <status>HIDDEN</status>
       </field>
       <field>
         <points>300</points>
         <answer>A-E3</answer>
         <question>Q-E3</question>
-        <status>HIDDEN</status>
       </field>
       <field>
         <points>400</points>
         <answer>A-E4</answer>
         <question>Q-E4</question>
-        <status>HIDDEN</status>
       </field>
       <field>
         <points>500</points>
         <answer>A-E5</answer>
         <question>Q-E5</question>
-        <status>HIDDEN</status>
       </field>      
     </category>
   </categories>

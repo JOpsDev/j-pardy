@@ -8,6 +8,8 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 
+import eu.javaland.jpardy.InvalidGameStateException;
+
 public class Game {
 
 	private List<Player> players = new ArrayList<>();
@@ -34,12 +36,23 @@ public class Game {
 		return ready;
 	}
 	
-	public static Game fromFile(String filename) {
+	public static Game fromFile(String filename) throws InvalidGameStateException {
 		XStream xStream = getXstream();
 		File file = new File(filename);
 		if (!file.canRead()) throw new RuntimeException("cannot read from file: "+filename);
 		Game game = (Game) xStream.fromXML(file);
+		
+		game.check();
+		
 		return game;
+	}
+
+	public void check() throws InvalidGameStateException {
+		if (categories == null) throw new InvalidGameStateException("the list for categories is null");
+		if (categories.isEmpty()) throw new InvalidGameStateException("no categories defined (list is empty)");
+		for (Category category : categories) {
+			category.check();
+		}
 	}
 
 	public static XStream getXstream() {
@@ -51,6 +64,15 @@ public class Game {
 //		xStream.alias("game",Game.class);
 		xStream.addImplicitCollection(Category.class, "fields");
 		return xStream;
+	}
+
+	public Field showField(int categoryIndex, int fieldPoints) throws InvalidInputException {
+		if (categoryIndex< 1 || categoryIndex > categories.size()) throw new InvalidInputException("the category number has to be beetween 1 and "+categories.size()+" but was "+categoryIndex);
+		Category category = categories.get(categoryIndex-1);
+		Field field = category.getField(fieldPoints);
+		field.reveal();
+		return field;
+		
 	}
 
 }
