@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Test;
-
 import com.thoughtworks.xstream.XStream;
 
 import eu.javaland.jpardy.core.Category;
@@ -51,6 +49,8 @@ public class DumpXml {
 		field = new Field(200, "Generics",
 				"Wie wurden Collections in Java 5 erweitert?");
 		category.addField(field);
+		
+		System.out.println(game);
 
 		XStream xstream = Game.getXstream();
 		String xml = xstream.toXML(game);

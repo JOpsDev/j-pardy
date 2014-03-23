@@ -7,7 +7,9 @@ public class Field implements Comparable<Field>{
 	private String answer;
 	private String question;
 	private FieldStatus status;
+	private Player solvedBy;
 	
+
 	public Field(int points, String answer, String question) {
 		this.points = points;
 		this.answer = answer;
@@ -25,6 +27,10 @@ public class Field implements Comparable<Field>{
 	public String getQuestion() {
 		return question;
 	}
+	public Player getSolvedBy() {
+		return solvedBy;
+	}
+
 
 
 	@Override
@@ -55,9 +61,18 @@ public class Field implements Comparable<Field>{
 	}
 
 
-	public void markSolved() {
+	public void markSolved(Player solvedBy) {
 		if (status != FieldStatus.REVEALED) throw new InvalidInputException("field '"+answer+"' is in wrong state: "+status);
-		status = FieldStatus.OPEN;
+		status = FieldStatus.OPEN_SOLVED;
+		this.solvedBy = solvedBy;
+		
+	}
+
+
+	public void markUnsolved() {
+		if (status != FieldStatus.REVEALED) throw new InvalidInputException("field '"+answer+"' is in wrong state: "+status);
+		status = FieldStatus.OPEN_UNSOLVED;
+		this.solvedBy = null;
 	}
 	
 }

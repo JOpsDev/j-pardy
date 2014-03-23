@@ -1,16 +1,17 @@
 package eu.javaland.jpardy.core;
 
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import eu.javaland.jpardy.InvalidGameStateException;
 
 public class Category {
 
 	private String displayName;
-	private Set<Field> fields = new TreeSet<>();
+	private List<Field> fields = new ArrayList<>();
 
-	public Set<Field> getFields() {
+	public List<Field> getFields() {
 		return fields;
 	}
 
@@ -24,6 +25,7 @@ public class Category {
 
 	public void addField(Field field) {
 		fields.add(field);
+		Collections.sort(fields);
 	}
 
 	public Field getField(int fieldPoints) {
@@ -47,7 +49,8 @@ public class Category {
 
 	public boolean allFieldsOpen() {
 		for (Field field: fields) {
-			if (!FieldStatus.OPEN.equals(field.getStatus())) {
+			FieldStatus status = field.getStatus();
+			if (FieldStatus.HIDDEN.equals(status) || FieldStatus.REVEALED.equals(status)) {
 				return false;
 			}
 		}

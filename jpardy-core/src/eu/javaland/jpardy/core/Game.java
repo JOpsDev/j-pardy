@@ -24,6 +24,7 @@ public class Game {
 
 	public void addPlayer(Player player) {
 		players.add(player);
+		player.setNumber(players.size());
 	}
 	
 	public void addCategroy(Category category) {
@@ -82,7 +83,7 @@ public class Game {
 	}
 
 	public void solveField(Field field, Player player) {
-		field.markSolved();
+		field.markSolved(player);
 		player.addPoints(field);
 		
 	}
@@ -105,16 +106,63 @@ public class Game {
 		return categories.size();
 	}
 	
-	public int getRowCount() throws InvalidGameStateException {
+	public int getRowCount()  {
 		if (numberOfRows != null) return numberOfRows;
 		if (categories.isEmpty()) throw new IllegalStateException("there are no categories added from which I could count the number of rows/fields");
 		int rowcount = categories.get(0).getFieldCount();
 		for (Category category : categories) {
-			if (category.getFieldCount() != rowcount) throw new InvalidGameStateException("all categories must have the the same number of rows/fields");
+			if (category.getFieldCount() != rowcount) throw new IllegalStateException("all categories must have the the same number of rows/fields");
 		}
 		numberOfRows = rowcount;
 		return rowcount;
-		
+	}
+	
+	public Field getField(int categoryNo, int rowNo) {
+		return categories.get(categoryNo-1).getFields().get(rowNo-1);
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder s = new StringBuilder("---------------\n");
+		s.append("Players ("+players.size()+"):\n");
+		for (Player player : players) {
+			s.append(player.getNumber()+" "+player.getNickname()+": "+player.getPoints()+"\n");
+		}
+		s.append("\nGame state: ready "+isReady()+"  running "+isRunning()+"\n");
+		int catNo = getCategoryCount();
+		int rowNo = getRowCount();
+		for (int x = 0; x < catNo; x++) {
+			String catName = categories.get(x).getDisplayName();
+			s.append("["+catName + "] ");
+		}
+		s.append("\n\n");
+		for (int y = 1; y <= rowNo; y++) {
+			for (int x = 1; x <= catNo; x++) {
+				Field field = getField(x, y);
+				s.append("["+field.getPoints()+"|"+field.getAnswer()+"] ");
+				
+			}
+			s.append("\n");
+			for (int x = 1; x <= catNo; x++) {
+				Field field = getField(x, y);
+				String statustext;
+				FieldStatus status = field.getStatus();
+				if (FieldStatus.OPEN_SOLVED.equals(status)) {
+					Player solvedBy = field.getSolvedBy();
+					statustext = solvedBy == null ? "solvedBy is null" : solvedBy.getNickname();
+				} else {
+					statustext = status == null ? "status is null" : status.toString();
+				}
+				s.append("["+statustext+"] ");
+			}
+			s.append("\n\n");		}
+		return s.toString();
+	}
+
+	public void markUnsolved(Field field) {
+		field.markUnsolved();
 	}
 
 }
+
+

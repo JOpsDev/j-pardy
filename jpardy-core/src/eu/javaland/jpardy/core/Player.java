@@ -3,6 +3,7 @@ package eu.javaland.jpardy.core;
 public class Player {
 	private String nickname = null;
 	private int points = 0;
+	private int number;
 	
 	
 	public Player() {
@@ -12,6 +13,16 @@ public class Player {
 	public Player(String nickname) {
 		this.nickname = nickname;
 	}
+
+	public int getNumber() {
+		return number;
+	}
+
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
 
 	public String getNickname() {
 		return nickname == null ? "N.N.": nickname;

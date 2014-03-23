@@ -1,9 +1,11 @@
 package eu.javaland.jpardy;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
+import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import org.junit.Test;
 
@@ -17,7 +19,7 @@ public class HomerunTest {
 
 	@Test
 	public void test() throws Exception {
-		Game game = Game.fromFile("test-games/test.jp");
+		Game game = Game.fromFile("test-games/test-noPlayers.jp");
 		Player p1 = new Player("P1");
 		game.addPlayer(p1);
 		Player p2 = new Player("P2");
@@ -25,7 +27,8 @@ public class HomerunTest {
 		Player p3 = new Player("P3");
 		game.addPlayer(p3);
 		assertTrue(game.isReady());
-		
+
+		System.out.println(game.toString());
 
 		// P1 solves cat.3 for 200
 		Field field = game.showField(3,200);
@@ -35,7 +38,7 @@ public class HomerunTest {
 		
 		game.solveField(field,p1);
 		assertEquals(200, p1.getPoints());
-		assertEquals(FieldStatus.OPEN, field.getStatus());
+		assertEquals(FieldStatus.OPEN_SOLVED, field.getStatus());
 		
 		// P2 solves cat.2 for 300
 		field = game.showField(2, 300);
@@ -51,13 +54,23 @@ public class HomerunTest {
 		assertEquals(-100, p2.getPoints());
 		game.solveField(field, p3);
 		assertEquals(400, p3.getPoints());
+
 		
+		// P1 and P3 misses cat.1 for 300, unsolved
+		field = game.showField(1, 300);
+		game.missedField(field, p1);
+		assertEquals(-100, p1.getPoints());
+		game.missedField(field, p3);
+		assertEquals(100, p3.getPoints());
+		game.markUnsolved(field);
+		assertEquals(FieldStatus.OPEN_UNSOLVED, field.getStatus());
+	
 		// solve all the rest
 		int p1Pts = p1.getPoints();
 		while (game.isRunning()) {
 			List<Category> categories = game.getCategories();
 			for (Category category : categories) {
-				Set<Field> fields = category.getFields();
+				Collection<Field> fields = category.getFields();
 				for (Field actField : fields) {
 					if (actField.isHidden()) {
 						actField.reveal();
@@ -68,7 +81,8 @@ public class HomerunTest {
 			}
 		}
 		assertEquals(p1Pts, p1.getPoints());
-		
+
+		System.out.println(game.toString());
 		
 	}
 

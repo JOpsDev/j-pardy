@@ -2,6 +2,7 @@ package eu.javaland.jpardy;
 
 import static org.junit.Assert.*;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -19,13 +20,19 @@ public class CategoryTest {
 		category.addField(field1);
 		Field field2 = new Field(2,"a","q");
 		category.addField(field2);
+		Field field3 = new Field(3,"a","q");
+		category.addField(field3);
 		
 		assertFalse(category.allFieldsOpen());
 		field1.reveal();
-		field1.markSolved();
+		field1.markSolved(null);
 		assertFalse(category.allFieldsOpen());
 		field2.reveal();
-		field2.markSolved();
+		field2.markSolved(null);
+		assertFalse(category.allFieldsOpen());
+		field3.reveal();
+		field3.markUnsolved();
+		
 		assertTrue(category.allFieldsOpen());
 	}
 	
@@ -49,7 +56,7 @@ public class CategoryTest {
 		category.addField(field1);
 		Field field2 = new Field(1,"a","q");
 		category.addField(field2);
-		Set<Field> fields = category.getFields();
+		Collection<Field> fields = category.getFields();
 		Iterator<Field> iterator = fields.iterator();
 		assertEquals(field2, iterator.next());
 		assertEquals(field1, iterator.next());

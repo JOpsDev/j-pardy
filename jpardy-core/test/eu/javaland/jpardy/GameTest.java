@@ -62,14 +62,18 @@ public class GameTest {
 		field = game.showField(1, 100);
 		game.solveField(field, pl);
 		assertTrue(game.isRunning());
+		assertEquals(pl, field.getSolvedBy());
 		field = game.showField(1, 200);
 		game.solveField(field, pl);
 		assertTrue(game.isRunning());
+		assertEquals(pl, field.getSolvedBy());
 		field = game.showField(2, 100);
 		game.solveField(field, pl);
 		assertTrue(game.isRunning());
+		assertEquals(pl, field.getSolvedBy());
 		field = game.showField(2, 200);
 		game.solveField(field, pl);
+		assertEquals(pl, field.getSolvedBy());
 		assertFalse(game.isRunning());
 		
 	}
